@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, Music2, Pause, Play, Sparkles } from "lucide-react";
+import { ArrowDown, Music2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { memories } from "@/data/memories";
 
@@ -41,7 +41,7 @@ const questions = [
   { question: "Who's smiling right now?", answers: ["Veduu", "Veduu", "Obviously Veduu ♡"], reply: "I had a feeling. Keep that smile." },
 ];
 
-function SectionLabel({ letter, children }: { letter: string; children: React.ReactNode }) {
+function SectionLabel({ letter, children }: { letter: string; children: ReactNode }) {
   return <div className="mb-10 flex items-baseline gap-4"><span className="font-mono text-[11px] text-gold">({letter})</span><h2 className="font-serif text-4xl leading-tight text-burgundy-deep sm:text-5xl">{children}</h2></div>;
 }
 
