@@ -145,7 +145,10 @@
   }
 
   body {
-    background-color: var(--color-background);
+    background:
+      radial-gradient(circle at 12% 8%, oklch(0.91 0.05 24 / 68%), transparent 26rem),
+      radial-gradient(circle at 88% 22%, oklch(0.9 0.045 298 / 58%), transparent 25rem),
+      var(--color-background);
     color: var(--color-foreground);
     font-family: "Inter", sans-serif;
   }
@@ -175,6 +178,19 @@
 @keyframes keepsake-shimmer {
   0%, 100% { opacity: 0.35; }
   50% { opacity: 0.8; }
+}
+.keepsake-paper {
+  background: linear-gradient(135deg, oklch(0.99 0.007 75 / 92%), oklch(0.955 0.028 52 / 78%));
+  box-shadow: 0 28px 70px oklch(0.38 0.07 12 / 16%), inset 0 1px 0 oklch(1 0 0 / 80%);
+}
+.keepsake-card {
+  box-shadow: 0 13px 32px oklch(0.38 0.06 12 / 8%), inset 0 1px 0 oklch(1 0 0 / 72%);
+}
+.keepsake-card:hover { box-shadow: 0 20px 42px oklch(0.38 0.07 12 / 15%), inset 0 1px 0 oklch(1 0 0 / 84%); }
+.keepsake-star { animation: keepsake-star 3.4s ease-in-out infinite; }
+@keyframes keepsake-star {
+  0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0); }
+  50% { opacity: 1; transform: scale(1.12) rotate(18deg); }
 }
 .keepsake-rise { animation: keepsake-rise 850ms cubic-bezier(0.32, 0.72, 0, 1) both; }
 .keepsake-drift { animation: keepsake-drift 18s ease-in-out infinite; }

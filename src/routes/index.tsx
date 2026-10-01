@@ -36,13 +36,13 @@ const truths = [
 ];
 
 const questions = [
-  { question: "Who fell first?", answers: ["Me", "Definitely you", "We're not discussing this 😌"], reply: "I'll let you have your version of the story." },
+  { question: "What's our perfect plan?", answers: ["A long drive and music", "Food, laughs, and no rush", "Anywhere, as long as it's us ♡"], reply: "That sounds exactly like us." },
   { question: "Who pretends not to care?", answers: ["You", "Also you", "Still you"], reply: "A very convincing performance, Veduu." },
   { question: "Who's smiling right now?", answers: ["Veduu", "Veduu", "Obviously Veduu ♡"], reply: "I had a feeling. Keep that smile." },
 ];
 
 function SectionLabel({ letter, children }: { letter: string; children: ReactNode }) {
-  return <div className="mb-10 flex items-baseline gap-4"><span className="font-mono text-[11px] text-gold">({letter})</span><h2 className="font-serif text-4xl leading-tight text-burgundy-deep sm:text-5xl">{children}</h2></div>;
+  return <div className="mb-10"><div className="mb-4 flex items-center gap-3"><span className="font-mono text-[10px] uppercase tracking-[0.24em] text-gold">({letter})</span><span className="h-px w-12 bg-gold/55" /><span className="text-gold/70">✦</span></div><h2 className="font-serif text-4xl leading-tight text-burgundy-deep sm:text-5xl">{children}</h2></div>;
 }
 
 function VeduuPage() {
@@ -52,7 +52,7 @@ function VeduuPage() {
   const [surpriseOpen, setSurpriseOpen] = useState(false);
   const [confetti, setConfetti] = useState(false);
   const [musicOpen, setMusicOpen] = useState(false);
-  const [musicPlaying, setMusicPlaying] = useState(false);
+  const [autoPlayMusic, setAutoPlayMusic] = useState(false);
 
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal-on-scroll");
@@ -70,6 +70,7 @@ function VeduuPage() {
 
   const openLetter = () => {
     setOpened(true);
+    setAutoPlayMusic(true);
     window.setTimeout(() => document.getElementById("reasons")?.scrollIntoView({ behavior: "smooth" }), 80);
   };
 
@@ -80,11 +81,17 @@ function VeduuPage() {
         <div className="keepsake-drift absolute right-[5%] top-[38%] size-56 rounded-full bg-lavender/40 blur-3xl [animation-delay:-5s]" />
         <div className="keepsake-drift absolute bottom-[10%] left-[20%] size-48 rounded-full bg-gold/15 blur-3xl [animation-delay:-9s]" />
         <div className="keepsake-drift absolute left-[55%] top-[65%] size-32 rounded-full bg-blush/30 blur-3xl [animation-delay:-3s]" />
+        <span className="keepsake-star absolute left-[12%] top-[28%] font-serif text-xl text-gold/70">✦</span>
+        <span className="keepsake-star absolute right-[14%] top-[18%] font-serif text-2xl text-burgundy/45 [animation-delay:-1.2s]">♡</span>
+        <span className="keepsake-star absolute bottom-[18%] right-[11%] font-serif text-xl text-gold/65 [animation-delay:-2.1s]">✦</span>
       </div>
 
       {!opened ? (
         <section className="relative z-10 grid min-h-screen place-items-center px-6 py-16 text-center">
-          <div className="keepsake-rise mx-auto max-w-3xl">
+          <div className="keepsake-paper keepsake-rise relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-burgundy/15 px-7 py-14 sm:px-16 sm:py-18">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+            <span className="absolute left-7 top-7 font-serif text-2xl text-burgundy/25">♡</span>
+            <span className="absolute bottom-7 right-8 font-serif text-xl text-gold/65">✦</span>
             <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.3em] text-gold">A little note, just for you</p>
             <h1 className="font-serif text-6xl font-medium leading-[0.9] text-burgundy sm:text-8xl md:text-9xl">
               Hey, <span className="italic text-burgundy-deep">Veduu...</span>
@@ -95,7 +102,7 @@ function VeduuPage() {
             <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
               Because some feelings are easier to build than to say.
             </p>
-            <Button onClick={openLetter} className="mt-10 h-auto rounded-full border border-burgundy/30 bg-cream-soft/70 px-7 py-3.5 font-medium text-burgundy shadow-none backdrop-blur-md hover:bg-burgundy hover:text-primary-foreground">
+            <Button onClick={openLetter} className="mt-10 h-auto rounded-full border border-burgundy/30 bg-burgundy px-8 py-4 font-medium text-primary-foreground shadow-[0_12px_25px_oklch(0.39_0.105_8_/_25%)] transition-all hover:-translate-y-0.5 hover:bg-burgundy-deep hover:shadow-[0_18px_30px_oklch(0.39_0.105_8_/_32%)]">
               Open this <span aria-hidden="true">♡</span><ArrowDown className="size-4" />
             </Button>
             <p className="mt-16 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">Take your time</p>
@@ -103,6 +110,17 @@ function VeduuPage() {
         </section>
       ) : (
         <>
+          {autoPlayMusic && <iframe
+            aria-hidden="true"
+            className="pointer-events-none absolute size-px opacity-0"
+            src="https://www.youtube-nocookie.com/embed/y7tHZ3WeJAw?autoplay=1&playsinline=1&rel=0"
+            width="1"
+            height="1"
+            frameBorder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            tabIndex={-1}
+            title="Dandelions by Ruth B. autoplay"
+          />}
           <header className="sticky top-0 z-30 border-b border-foreground/10 bg-background/75 backdrop-blur-xl">
             <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-6">
               <a href="#top" className="font-serif text-xl italic text-burgundy">Veduu</a>
@@ -116,13 +134,19 @@ function VeduuPage() {
                 <Button variant="ghost" size="icon" aria-label="Music options" aria-expanded={musicOpen} onClick={() => setMusicOpen((value) => !value)} className="size-9 rounded-full text-burgundy hover:bg-blush/40">
                   <Music2 className="size-4" />
                 </Button>
-                {musicOpen && <div className="absolute right-0 top-11 z-40 w-56 border border-border bg-cream-soft p-4 shadow-lg">
+                {musicOpen && <div className="absolute right-0 top-11 z-40 w-72 border border-border bg-cream-soft p-4 shadow-lg">
                   <p className="font-serif text-lg text-burgundy">Our little soundtrack</p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Add your song at <code className="font-mono">/music/our-song.mp3</code>.</p>
-                  <audio controls className="mt-3 w-full" src="/music/our-song.mp3" onPlay={() => setMusicPlaying(true)} onPause={() => setMusicPlaying(false)}>
-                    Your browser does not support audio playback.
-                  </audio>
-                  <span className="sr-only">{musicPlaying ? "Music playing" : "Music paused"}</span>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Dandelions — Ruth B.</p>
+                  <iframe
+                    className="mt-3 rounded-xl"
+                    src={`https://open.spotify.com/embed/track/2eAvDnpXP5W0cVtiI0PUxV?utm_source=generator${autoPlayMusic ? "&autoplay=1" : ""}`}
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    title="Dandelions by Ruth B."
+                  />
                 </div>}
               </div>
             </div>
@@ -142,7 +166,7 @@ function VeduuPage() {
             <SectionLabel letter="a">Why you?</SectionLabel>
             <p className="-mt-5 mb-9 max-w-xl text-sm leading-relaxed text-muted-foreground">It's never just one thing. Here are a few of the little ones.</p>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-              {reasons.map((reason, index) => <button key={reason.title} type="button" onClick={() => setSelectedReason(selectedReason === index ? null : index)} aria-expanded={selectedReason === index} className="group min-h-48 rounded-md border border-foreground/10 bg-cream-soft/70 p-6 text-left backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              {reasons.map((reason, index) => <button key={reason.title} type="button" onClick={() => setSelectedReason(selectedReason === index ? null : index)} aria-expanded={selectedReason === index} className="keepsake-card group min-h-48 rounded-2xl border border-foreground/10 bg-cream-soft/75 p-6 text-left backdrop-blur-md transition duration-300 hover:-translate-y-1.5 hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 <span className="font-mono text-[11px] text-gold">0{index + 1}</span>
                 <span className="mt-3 block font-serif text-2xl italic text-burgundy">{reason.title}</span>
                 <span className="mt-3 block text-sm leading-relaxed text-ink-soft">{selectedReason === index ? reason.detail : "Tap to unfold this thought."}</span>
@@ -162,7 +186,7 @@ function VeduuPage() {
           <section className="relative z-10 mx-auto max-w-6xl px-6 py-20 sm:py-24">
             <div className="reveal-on-scroll"><SectionLabel letter="c">Okay Veduu, let's see how well you know me...</SectionLabel></div>
             <div className="grid gap-4 md:grid-cols-3">
-              {questions.map((item, questionIndex) => <div key={item.question} className="reveal-on-scroll rounded-md border border-foreground/10 bg-cream-soft/70 p-6 backdrop-blur-md">
+              {questions.map((item, questionIndex) => <div key={item.question} className="keepsake-card reveal-on-scroll rounded-2xl border border-foreground/10 bg-cream-soft/75 p-6 backdrop-blur-md">
                 <h3 className="font-serif text-2xl text-burgundy-deep">{item.question}</h3>
                 <div className="mt-5 flex flex-col gap-2">
                   {item.answers.map((answer, answerIndex) => <Button key={`${answer}-${answerIndex}`} variant="outline" onClick={() => setAnswers((current) => ({ ...current, [questionIndex]: answerIndex }))} className={`h-auto min-h-10 justify-start whitespace-normal rounded-sm border-foreground/15 bg-background/60 px-3 py-2 text-left text-xs font-normal text-foreground shadow-none hover:border-burgundy/40 hover:bg-blush/25 ${answers[questionIndex] === answerIndex ? "border-burgundy/50 bg-blush/30" : ""}`}>
@@ -177,8 +201,24 @@ function VeduuPage() {
           <section id="moments" className="relative z-10 mx-auto max-w-6xl scroll-mt-20 px-6 py-20 sm:py-24">
             <div className="reveal-on-scroll"><SectionLabel letter="d">Little moments I keep</SectionLabel></div>
             <div className="relative grid gap-5 md:grid-cols-2">
-              {memories.map((memory, index) => <article key={memory.title} className="reveal-on-scroll border border-foreground/10 bg-cream-soft/70 p-6 backdrop-blur-md" style={{ transitionDelay: `${index * 120}ms` }}>
-                {memory.photo ? <img src={memory.photo} alt={memory.title} className="mb-5 aspect-[4/3] w-full object-cover" /> : <div aria-hidden="true" className={`mb-5 grid aspect-[4/3] place-items-center ${index % 2 ? "bg-lavender/30" : "bg-blush/30"}`}><span className="font-serif text-3xl italic text-burgundy/60">a moment, kept</span></div>}
+              {memories.map((memory, index) => <article key={memory.title} className="keepsake-card reveal-on-scroll overflow-hidden rounded-2xl border border-foreground/10 bg-cream-soft/75 p-6 backdrop-blur-md" style={{ transitionDelay: `${index * 120}ms` }}>
+                {memory.photo ? (
+                  <>
+                    <img
+                      src={memory.photo}
+                      alt={memory.title}
+                      className="mb-5 aspect-[4/3] w-full rounded-xl object-cover shadow-sm"
+                      style={{ objectPosition: memory.photoPosition ?? "center" }}
+                      onError={(event) => {
+                        event.currentTarget.hidden = true;
+                        event.currentTarget.nextElementSibling?.removeAttribute("hidden");
+                      }}
+                    />
+                    <MemoryPhotoFallback index={index} hidden />
+                  </>
+                ) : (
+                  <MemoryPhotoFallback index={index} />
+                )}
                 <p className="font-mono text-[11px] text-gold">{memory.date}</p>
                 <h3 className="mt-2 font-serif text-2xl italic text-burgundy">{memory.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{memory.description}</p>
@@ -188,7 +228,7 @@ function VeduuPage() {
 
           <section id="letter" className="relative z-10 mx-auto max-w-3xl scroll-mt-20 px-6 py-20 sm:py-24">
             <div className="reveal-on-scroll"><SectionLabel letter="e">If I could say just one thing...</SectionLabel></div>
-            <div className="reveal-on-scroll border border-foreground/10 bg-cream-soft/70 p-7 backdrop-blur-md sm:p-12">
+            <div className="keepsake-paper reveal-on-scroll rounded-2xl border border-foreground/10 p-7 backdrop-blur-md sm:p-12">
               <p className="font-serif text-2xl leading-snug text-burgundy-deep sm:text-3xl">Veduu,</p>
               <div className="mt-6 space-y-5 font-serif text-xl leading-relaxed text-ink-soft sm:text-2xl">
                 <p>I don't know what the future looks like.<br />I don't know where this story goes.</p>
@@ -237,5 +277,17 @@ function VeduuPage() {
         </>
       )}
     </main>
+  );
+}
+
+function MemoryPhotoFallback({ index, hidden = false }: { index: number; hidden?: boolean }) {
+  return (
+    <div
+      aria-hidden="true"
+      hidden={hidden}
+      className={`mb-5 grid aspect-[4/3] place-items-center ${index % 2 ? "bg-lavender/30" : "bg-blush/30"}`}
+    >
+      <span className="font-serif text-3xl italic text-burgundy/60">a moment, kept</span>
+    </div>
   );
 }
