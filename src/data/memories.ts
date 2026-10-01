@@ -1,3 +1,6 @@
+import elevatorMemory from "@/assets/veduu-elevator-memory.png.asset.json";
+import closeupMemory from "@/assets/veduu-closeup-memory.png.asset.json";
+
 export type Memory = {
   date: string;
   title: string;
@@ -5,17 +8,17 @@ export type Memory = {
   photo?: string;
 };
 
-// Replace these starter entries with your own dates, words, and photo paths.
-// Add images under public/images and use paths such as /images/memory-1.jpg.
 export const memories: Memory[] = [
   {
     date: "A little moment",
-    title: "That one conversation",
-    description: "Nothing extraordinary happened. But for some reason, I remember it.",
+    title: "Just us, for a minute",
+    description: "A tiny mirror moment that somehow feels like its own little world.",
+    photo: elevatorMemory.url,
   },
   {
-    date: "An ordinary day",
-    title: "A random day",
-    description: "One of those completely normal days that became memorable simply because you were part of it.",
+    date: "One to keep close",
+    title: "A favorite kind of closeness",
+    description: "A close-up memory, kept exactly as sweet and silly as it feels.",
+    photo: closeupMemory.url,
   },
 ];
