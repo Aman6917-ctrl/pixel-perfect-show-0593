@@ -1,0 +1,2 @@
+- [x] Complete and verify the romantic Veduu page, including animations and mobile interactions.
+- [x] Add the two newly uploaded photos to “Little moments I keep.”

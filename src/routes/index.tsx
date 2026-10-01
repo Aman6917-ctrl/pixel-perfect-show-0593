@@ -213,7 +213,18 @@ function VeduuPage() {
                 <p className="mt-2 font-serif text-4xl text-primary-foreground sm:text-5xl">Veduu <span aria-hidden="true">♡</span></p>
                 <p className="mt-4 font-serif text-xl italic text-primary-foreground/80">You're my favorite notification.</p>
                 <Button onClick={() => { setConfetti(true); window.setTimeout(() => setConfetti(false), 2200); }} className="mt-8 h-auto rounded-full bg-gold px-6 py-3 text-burgundy-deep shadow-none hover:bg-gold/90">Okay, now go smile</Button>
-                {confetti && <div role="status" className="mt-5 font-serif text-xl text-blush" aria-live="polite">A little joy, just for you ✦ ♡ ✦</div>}
+                {confetti && <>
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 top-1/2 overflow-hidden">
+                    {[
+                      "left-1/4 bottom-8 text-gold",
+                      "left-1/3 bottom-4 text-blush [animation-delay:80ms]",
+                      "left-1/2 bottom-6 text-gold [animation-delay:160ms]",
+                      "left-2/3 bottom-3 text-blush [animation-delay:60ms]",
+                      "left-3/4 bottom-8 text-gold [animation-delay:200ms]",
+                    ].map((particle) => <span key={particle} className={`keepsake-confetti absolute font-serif text-2xl ${particle}`}>✦</span>)}
+                  </div>
+                  <p role="status" className="relative mt-5 font-serif text-xl text-blush" aria-live="polite">A little joy, just for you.</p>
+                </>}
               </div>}
             </div>
           </section>
