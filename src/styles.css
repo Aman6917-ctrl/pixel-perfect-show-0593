@@ -179,10 +179,17 @@
 .keepsake-rise { animation: keepsake-rise 850ms cubic-bezier(0.32, 0.72, 0, 1) both; }
 .keepsake-drift { animation: keepsake-drift 18s ease-in-out infinite; }
 .keepsake-shimmer { animation: keepsake-shimmer 4s ease-in-out infinite; }
+.keepsake-confetti { animation: keepsake-confetti 1.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes keepsake-confetti {
+  0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+  18% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-8rem) scale(1.1) rotate(32deg); }
+}
 .reveal-on-scroll { opacity: 0; transform: translateY(18px); transition: opacity 700ms ease, transform 700ms ease; }
 .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .reveal-on-scroll { opacity: 1; transform: none; }
+  .keepsake-confetti { animation: none; opacity: 1; }
 }
